@@ -1,18 +1,28 @@
 # Simulador Bodega en Buenaventura
 
 ## Introducción
-En el puerto marítimo de Buenaventura (Colombia), la gestión eficiente del almacenamiento y salida de contenedores representa un desafío logístico importante. Este proyecto desarrolla un simulador gráfico interactivo que reproduce la organización de una bodega portuaria con capacidad para 504 contenedores, distribuidos en 56 columnas con una altura máxima de 8 contenedores cada una.
-Cada contenedor está identificado con un código numérico de cuatro cifras, y el sistema debe permitir su almacenamiento, búsqueda y extracción, simulando las operaciones reales de apilamiento y desapilamiento.
-El propósito es aplicar los conceptos de estructuras de datos dinámicos lineales (listas, pilas y colas), algoritmos de búsqueda y ordenamiento, y los patrones de diseño MVC y DAO, desarrollando una aplicación práctica que refuerce su comprensión de la lógica computacional y la interacción entre módulos.
+Simulador gráfico de almacenamiento y salida de contenedores en una bodega portuaria, implementado en Python bajo los patrones de diseño MVC y DAO.
+El sistema modela una bodega real con 56 columnas, 8 filas y pilas de capacidad 8, permitiendo almacenar hasta 504 contenedores. Cada contenedor posee un código único, y el simulador permite operaciones de llenado, búsqueda, eliminación y persistencia de datos.
 
 ## Propuesta
-El simulador representa una bodega portuaria donde los contenedores se apilan en diferentes columnas (pilas). Cada pila admite un número máximo de 8 contenedores y, en total, la bodega puede almacenar 504 unidades.
-Cuando un contenedor llega, se deposita de forma secuencial en la primera pila disponible. Cuando el usuario desea retirarlo, el sistema busca el código en todas las pilas, desapila los contenedores superiores hasta encontrarlo, lo retira, y luego vuelve a apilar los contenedores desplazados en el mismo orden.
-El sistema incluye una interfaz gráfica desarrollada, que permite visualizar las pilas, como se apilan y se desapilan los contenedores, insertar o eliminar contenedores, buscar por código, y mostrar el estado actual de la bodega.
-- Principales funcionalidades:
-  1. Almacenar contenedores secuencialmente respetando la capacidad máxima.
-  2. Retirar un contenedor por código, sin importar su posición.
-  3. Mostrar gráficamente la ubicación del contenedor y el estado de la bodega en tiempo real.
+El simulador se inspira en la logística portuaria del puerto marítimo de Buenaventura, donde se requiere controlar el almacenamiento y salida de contenedores dentro de una bodega con restricciones de espacio y prioridad. La aplicación proporciona una interfaz gráfica que muestra el estado de la bodega en tiempo real, permitiendo al usuario interactuar mediante operaciones de inserción, búsqueda, extracción y consulta.
+Entre sus funcionalidades principales destacan:
+- Almacenamiento secuencial en pilas con altura máxima de 8 niveles.
+- Retiro de contenedores por código, con desapilado temporal.
+- Gestión de historial de movimientos mediante lista dinámica.
+- Simulación de salidas prioritarias.
+- Persistencia de datos con el patrón DAO.
+
+## Funcionamiento:
+- Llenado secuencial.
+- Llenado aleatorio.
+- Búsqueda de contenedores.
+- Eliminación de contenedores.
+- Persistencia de datos (.json).
+- Controller
+
+## Interfaz
+<img width="999" height="561" alt="INTERFAZ SIMULADOR" src="https://github.com/user-attachments/assets/31617fcd-901f-4718-a3bf-02deca70730b" />
  
 ## Arquitectura
 ```
@@ -27,6 +37,7 @@ proyectoSimulador/
 ├── view/
 │ ├── bodega_widget.py/
 │ ├── main_view.py/
+│ ├── pilaAuxiliar_widget.py/
 │ ├── styles.py/
 └── main.py
 ```
