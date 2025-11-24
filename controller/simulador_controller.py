@@ -33,7 +33,7 @@ class SimuladorController:
         
         print(" Bodega llenada y tabla hash actualizada.")
 
- 
+
     def buscar_contenedor(self):
         # Verifico que haya contenedores en la tabla
         if not self.tabla_hash:
@@ -47,7 +47,7 @@ class SimuladorController:
         print(f" Contenedor {codigo} encontrado en columna {ubicacion[0]+1}, fila {ubicacion[1]+1}, nivel {ubicacion[2]+1}.")
         return codigo, ubicacion
 
-   
+
     def eliminar_contenedor(self, codigo):
         # Primero verifico si el contenedor existe
         if codigo not in self.tabla_hash:
@@ -102,3 +102,13 @@ class SimuladorController:
                     self.tabla_hash[contenedor.codigo] = (c, f, nivel)
 
         print(" Datos cargados y tabla hash reconstruida.")
+
+    def obtener_superiores(self, ubic):
+        col, fila, nivel = ubic
+        pila = self.bodega.bodega[col][fila]
+        
+        # Los superiores son los contenedores que están POR ENCIMA del nivel encontrado
+        # nivel+1 porque queremos los que están arriba del contenedor encontrado
+        cantidad_superiores = len(pila.elementos) - (fila + 1)
+
+        return [fila + 1 + i for i in range(cantidad_superiores)]

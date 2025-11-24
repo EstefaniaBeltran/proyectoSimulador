@@ -1,6 +1,9 @@
 # Estado de la bodega(JSON)
-
 import json  
+from model.bodega import Bodega, Contenedor
+from model.pila import Pila
+
+
 def guardar_bodega(bodega):
     """
     Esta función guarda toda la información de la bodega en un archivo JSON.
@@ -34,3 +37,28 @@ def guardar_bodega(bodega):
         json.dump(datos, archivo, indent=4)
 
     print(" Bodega guardada correctamente en 'bodega_guardada.json'")
+
+def cargar_datos():
+    try:
+        with open("bodega_guardada.json", "r") as archivo:
+            datos = json.load(archivo)
+
+        columnas = datos["columnas"]
+        filas = datos["filas"]
+        capacidad = datos["capacidad_pila"]
+
+        bodega = Bodega(columnas, filas, capacidad)
+
+        # reconstruir contenedores en las pilas
+        for c in range(columnas):
+            for f in range(filas):
+                codigos = datos["bodega"][c][f]
+                for codigo in codigos:
+                    bodega.bodega[c][f].push(Contenedor(codigo))
+
+        print("Datos cargados correctamente.")
+        return bodega
+
+    except FileNotFoundError:
+        print("No existe archivo para cargar.")
+        return Bodega()

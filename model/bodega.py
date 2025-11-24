@@ -2,7 +2,18 @@
 
 import random
 from model.pila import Pila
-from model.contenedor import Contenedor
+
+# Representa cada contenedor lso cuales tienen un codigo diferente
+
+class Contenedor:
+    def __init__(self, codigo):
+        # Aquí guardo el código que identifica a este contenedor
+        self.codigo = codigo
+
+    def __str__(self):
+        # Esto define cómo quiero que se vea cuando lo imprima por consola
+        return f"Contenedor({self.codigo})"
+
 
 class Bodega:
     def __init__(self, columnas=56, filas=8, capacidad_pila=8):
@@ -34,7 +45,7 @@ class Bodega:
                     pila.push(Contenedor(codigo))
                     codigo += 1  # sumo 1 para el siguiente código
 
-   
+
     def llenar_aleatorio(self):
         # Calculo cuántos contenedores necesito en total
         total = self.columnas * self.filas * self.capacidad_pila
